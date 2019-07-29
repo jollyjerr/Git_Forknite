@@ -1,4 +1,20 @@
 class Screen
+    def self.welcome
+        puts '40'
+        puts '              Git Forknite!'
+        puts ''
+        puts ''
+        puts ''
+        puts ''
+        puts ''
+        puts ''
+        puts ''
+        puts ''
+        puts ''
+        puts ''
+        puts '              Enter number of players between 2 and 5!'
+        puts ''
+    end
     def self.two
         puts ''
         puts ''
