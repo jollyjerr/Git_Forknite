@@ -10,10 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_29_212428) do
+ActiveRecord::Schema.define(version: 2019_07_29_213129) do
 
   create_table "players", force: :cascade do |t|
     t.string "name"
+  end
+
+  create_table "weapons", force: :cascade do |t|
+    t.string "name"
+    t.integer "damage"
   end
 
 end
