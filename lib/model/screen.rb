@@ -1,7 +1,9 @@
 require_all './lib'
 class Screen
     def self.welcome
-        puts '40                                                     \        / __      __  __  _   _  __    _____ __                      '
+        puts ''
+        puts ''
+        puts '                                                       \        / __      __  __  _   _  __    _____ __                      '
         puts '                                                        \  /\  / |__ |   |   |  | |\ /| |__      |  |  |                     '
         puts '                                                         \/  \/  |__ |__ |__ |__| | v | |__      |  |__|                     '
         puts '                                       _____                  _____                                                      _   '
