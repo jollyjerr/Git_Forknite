@@ -50,24 +50,28 @@ end
 def match
     number_of_players = Player.all.select {|player| player.health > 0}.count
     system("clear")
-    Screen.send(Numbers_to_name[number_of_players])
+    if number_of_players > 1
+        Screen.send(Numbers_to_name[number_of_players])
+    end
     if number_of_players > 2
-        Player.all.each do |player| 
-            turn_many(player)
+        number_of_players.times do |player_num|
+            many_checker(Player.all[player_num])
         end
         match
     elsif number_of_players == 2
-        Player.all.each do |player|
-            if player.health < 1
-                puts "run game_over here"
-            end
-            puts "Your health is #{player.health}"
-            turn_duel(player)
-        end
+        duel_checker(Player.all[0])
+        duel_checker(Player.all[1])
         match
+    elsif number_of_players == 1
+        game_over
+    end
+end
+
+def duel_checker(player)
+    if player.health > 0
+        turn_duel(player)
     else
-        puts "run game_over here"
-        sleep(5)
+        game_over
     end
 end
 
@@ -77,6 +81,13 @@ def turn_duel(player)
     target.save
     puts target.health
     sleep(2)
+end
+
+def many_checker(player)
+    if player.health > 0
+        turn_many(player)
+    else 
+    end
 end
 
 def turn_many(player)
@@ -98,5 +109,11 @@ def attack(player)
     weapon.damage
 end
 
+
+# HANDLE END OF GAME
+def game_over
+    Screen.one
+    puts "You got FORKED"
+end
 
 
