@@ -1,9 +1,10 @@
 require_all './lib'
-number_of_players = nil
+Numbers_to_name = {5 => "five", 4 => "four", 3 => "three", 2 => "two", 1 => "one"}
+
 
 def main_menu
     system("clear")
-    Player.delete_all
+    Player.destroy_all
     Screen.welcome
     user_input = gets.chomp.to_i
     case user_input
@@ -20,10 +21,11 @@ def main_menu
     match
 end
 
+# PLAYER CREATION
 def create_player
     Screen.new_player
     player_name = gets.chomp
-    new_player = Player.new(name: player_name)    #CHANGE THIS TO CREATE BEFORE TESTING!!!!!!!!!!!!!
+    new_player = Player.create(name: player_name)
     system("clear")
     select_weapons(new_player)
 end
@@ -40,11 +42,78 @@ def select_weapons(player)
     weapon_two_choice = gets.chomp
     player.weapons << Weapon.all.select {|weapon| weapon.name == weapon_two_choice}
     puts "#{weapon_two_choice} equipped!"
-    puts "#{player.weapons.map {|weapon| weapon.name}}"
+    # puts "#{player.weapons.map {|weapon| weapon.name}}" #TEST CODE FOR CHECKING WEAPON OWNERSHIP
     sleep(0.5)
 end
 
+#PLAY GAME
 def match
+    number_of_players = Player.all.select {|player| player.health > 0}.count
     system("clear")
-    puts "Match Started!"
+    if number_of_players > 1
+        Screen.send(Numbers_to_name[number_of_players])
+    end
+    if number_of_players > 2
+        number_of_players.times do |player_num|
+            many_checker(Player.all[player_num])
+        end
+        match
+    elsif number_of_players == 2
+        duel_checker(Player.all[0])
+        duel_checker(Player.all[1])
+        match
+    elsif number_of_players == 1
+        game_over
+    end
 end
+
+def duel_checker(player)
+    if player.health > 0
+        turn_duel(player)
+    else
+        game_over
+    end
+end
+
+def turn_duel(player)
+    target = Player.all.select {|target| target.name != player.name}[0]
+    target.health -= attack(player)
+    target.save
+    puts target.health
+    sleep(2)
+end
+
+def many_checker(player)
+    if player.health > 0
+        turn_many(player)
+    else 
+    end
+end
+
+def turn_many(player)
+    puts "                                        #{player.name}, choose a target!"
+    input = gets.chomp
+    target = Player.all.select {|target| target.name == input || target.id == input}[0]
+    target.health -= attack(player)
+    target.save
+    puts target.health
+    sleep(2)
+end
+
+def attack(player)
+    puts "                                        #{player.name}, choose a weapon!"
+    puts ''
+    player.weapons.each {|weapon| puts "                                        #{weapon.name}"}
+    weapon_choice = gets.chomp
+    weapon = player.weapons.select {|weapon| weapon.name == weapon_choice}[0]
+    weapon.damage
+end
+
+
+# HANDLE END OF GAME
+def game_over
+    Screen.one
+    puts "You got FORKED"
+end
+
+
