@@ -24,7 +24,7 @@ end
 def create_player
     Screen.new_player
     player_name = gets.chomp
-    new_player = Player.new(name: player_name)
+    new_player = Player.create(name: player_name)
     system("clear")
     select_weapons(new_player)
 end
@@ -41,8 +41,7 @@ def select_weapons(player)
     weapon_two_choice = gets.chomp
     player.weapons << Weapon.all.select {|weapon| weapon.name == weapon_two_choice}
     puts "#{weapon_two_choice} equipped!"
-    player.save
-    # puts "#{player.weapons.map {|weapon| weapon.name}}" TEST CODE FOR CHECKING WEAPON OWNERSHIP
+    puts "#{player.weapons.map {|weapon| weapon.name}}" #TEST CODE FOR CHECKING WEAPON OWNERSHIP
     sleep(0.5)
 end
 
