@@ -48,8 +48,7 @@ end
 
 #PLAY GAME
 def match
-    kill_players
-    number_of_players = Player.all.count
+    number_of_players = Player.all.select {|player| player.health > 0}.count
     system("clear")
     Screen.send(Numbers_to_name[number_of_players])
     if number_of_players > 2
@@ -97,14 +96,6 @@ def attack(player)
     weapon_choice = gets.chomp
     weapon = player.weapons.select {|weapon| weapon.name == weapon_choice}[0]
     weapon.damage
-end
-
-def kill_players
-    Player.all.each do |player|
-        if player.health <= 0
-            player.destroy
-        end
-    end
 end
 
 
