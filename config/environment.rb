@@ -9,4 +9,4 @@ ActiveRecord::Base.establish_connection(
 :database => "db/forknite.db"
 )
 
-main_menu
+ActiveRecord::Base.logger = nil

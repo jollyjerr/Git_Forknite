@@ -1,3 +1,4 @@
+require_all './lib'
 class Screen
     def self.welcome
         puts '40'
@@ -14,6 +15,35 @@ class Screen
         puts ''
         puts '              Enter number of players between 2 and 5!'
         puts ''
+    end
+    def self.new_player
+        puts ''
+        puts ''
+        puts '                                         Welcome, new champion!         '
+        puts '                                                                            / \       Please enter your name:        '
+        puts '                                                                           |   |                                     '
+        puts '                                                                            \ /                                      '
+        puts '                                                                             |                                       '
+        puts '                                                                           / | \                                     '
+        puts '                                                                          /  |  \                                    '
+        puts '                                                                             |                                       '
+        puts '                                                                            / \                                      '
+        puts '                                                                           /   \                                     '
+        puts '                                                                          /     \                                    '
+        puts '                                        ------------------------------------------------------------------------------------'
+    end
+    def self.weapon_selection                                                                                                            
+        puts '                                                                            / \       Please choose two weapons:     '
+        puts '                                                                           |   |                                     '
+        puts '                                                                            \ /                                      '
+        puts '                                                                             |                                       '
+        puts '                                                                           / | \                                     '
+        puts '                                                                          /  |  \                                    '
+        puts '                                                                             |                                       '
+        puts '                                                                            / \                                      '
+        puts '                                                                           /   \                                     '
+        puts '                                                                          /     \                                    '
+        puts '                                        ------------------------------------------------------------------------------------'
     end
     def self.two
         puts ''
