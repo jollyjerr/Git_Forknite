@@ -1,9 +1,10 @@
 require_all './lib'
-number_of_players = nil
+Numbers_to_name = {5 => "five", 4 => "four", 3 => "three", 2 => "two"}
+
 
 def main_menu
     system("clear")
-    Player.delete_all
+    Player.destroy_all
     Screen.welcome
     user_input = gets.chomp.to_i
     case user_input
@@ -17,13 +18,13 @@ def main_menu
     end    
     system("clear")
     number_of_players.times {|player| create_player}
-    match
+    match(number_of_players)
 end
 
 def create_player
     Screen.new_player
     player_name = gets.chomp
-    new_player = Player.new(name: player_name)    #CHANGE THIS TO CREATE BEFORE TESTING!!!!!!!!!!!!!
+    new_player = Player.new(name: player_name)
     system("clear")
     select_weapons(new_player)
 end
@@ -40,11 +41,24 @@ def select_weapons(player)
     weapon_two_choice = gets.chomp
     player.weapons << Weapon.all.select {|weapon| weapon.name == weapon_two_choice}
     puts "#{weapon_two_choice} equipped!"
-    puts "#{player.weapons.map {|weapon| weapon.name}}"
+    player.save
+    # puts "#{player.weapons.map {|weapon| weapon.name}}" TEST CODE FOR CHECKING WEAPON OWNERSHIP
     sleep(0.5)
 end
 
-def match
+def match(players)
+    number_of_players = players
     system("clear")
-    puts "Match Started!"
+    display = Numbers_to_name[number_of_players]
+    Screen.send(display)
+    Player.all.each {|player| turn(player)}
 end
+
+def turn(player)
+    puts player.name
+    puts player.weapons
+    sleep(5)
+end
+
+
+
