@@ -41,7 +41,7 @@ def select_weapons(player)
     weapon_two_choice = gets.chomp
     player.weapons << Weapon.all.select {|weapon| weapon.name == weapon_two_choice}
     puts "#{weapon_two_choice} equipped!"
-    puts "#{player.weapons.map {|weapon| weapon.name}}" #TEST CODE FOR CHECKING WEAPON OWNERSHIP
+    # puts "#{player.weapons.map {|weapon| weapon.name}}" #TEST CODE FOR CHECKING WEAPON OWNERSHIP
     sleep(0.5)
 end
 
