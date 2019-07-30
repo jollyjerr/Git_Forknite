@@ -48,15 +48,31 @@ end
 def match(players)
     number_of_players = players
     system("clear")
-    display = Numbers_to_name[number_of_players]
-    Screen.send(display)
-    Player.all.each {|player| turn(player)}
+    Screen.send(Numbers_to_name[number_of_players])
+    if number_of_players > 2
+        Player.all.each {|player| turn_many(player)}
+    else
+        Player.all.each {|player| turn_duel(player)}
+    end
 end
 
-def turn(player)
-    puts player.name
-    puts player.weapons
-    sleep(5)
+def turn_duel(player)
+    attack(player)
+end
+
+def turn_many(player)
+    puts "                                        #{player.name}, choose a target!"
+    input = gets.chomp
+    target = Player.all.select {|target| target.name == input || target.id == input}
+    attack(player)
+end
+
+def attack(player)
+    puts "                                        #{player.name}, choose a weapon!"
+    puts ''
+    player.weapons.each {|weapon| puts "                                        #{weapon.name}"}
+    weapon_choice = gets.chomp
+    weapon = player.weapons.select {|weapon| weapon.name == weapon_choice}
 end
 
 
