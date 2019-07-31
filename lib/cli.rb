@@ -48,19 +48,21 @@ end
 
 #PLAY GAME
 def match
-    number_of_players = Player.all.select {|player| player.health > 0}.count
+    live_players = Player.all.select {|player| player.health > 0}
+    number_of_players = live_players.count
     system("clear")
     if number_of_players > 1
         Screen.send(Numbers_to_name[number_of_players])
     end
     if number_of_players > 2
         number_of_players.times do |player_num|
-            many_checker(Player.all[player_num])
+            many_checker(live_players[player_num])
         end
         match
     elsif number_of_players == 2
-        duel_checker(Player.all[0])
-        duel_checker(Player.all[1])
+        number_of_players.times do |player_num|
+            duel_checker(live_players[player_num])
+        end
         match
     elsif number_of_players == 1
         game_over
@@ -76,7 +78,9 @@ def duel_checker(player)
 end
 
 def turn_duel(player)
-    target = Player.all.select {|target| target.name != player.name}[0]
+    live_players = Player.all.select {|player| player.health > 0}
+    target = live_players.select {|target| target.name != player.name}[0]
+    puts target.name
     target.health -= attack(player)
     target.save
     puts target.health
@@ -86,7 +90,6 @@ end
 def many_checker(player)
     if player.health > 0
         turn_many(player)
-    else 
     end
 end
 
