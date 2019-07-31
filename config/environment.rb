@@ -1,7 +1,6 @@
 require 'sinatra/activerecord'
 require 'require_all'
 require 'pry'
-require 'tty-prompt'
 
 require_all 'lib'
 

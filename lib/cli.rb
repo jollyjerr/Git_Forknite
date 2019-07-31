@@ -38,7 +38,7 @@ def select_weapons(player)
     puts "Welcome #{player.name}!".center(95)
     Screen.weapon_selection
     choices = Weapon.all.map {|weapon| weapon.name}
-    weapon_choices = Prompt.multi_select("", choices, max: 2, default: 2, per_page: 10)
+    weapon_choices = Prompt.multi_select("", choices, max: 2, per_page: 10)
     weapon_one = weapon_choices[0]
     weapon_two = weapon_choices[1]
     player.weapons << Weapon.all.select {|weapon| weapon.name == weapon_one}
@@ -63,17 +63,12 @@ def match
     elsif number_of_players == 1
         game_over
     end
-
 end
 
 def duel_checker(player)
-    live_players = Player.all.select {|player| player.health > 0}
-    number_of_players = live_players.count
-    if number_of_players == 1
-        game_over
-    end
     refresh_screen
     if player.health > 0
+        puts "                                                                         player health on turn is #{player.health}"
         turn_duel(player)
     else
         game_over
