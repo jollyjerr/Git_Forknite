@@ -39,11 +39,18 @@ def select_weapons(player)
     Screen.weapon_selection
     choices = Weapon.all.map {|weapon| weapon.name}
     weapon_choices = Prompt.multi_select("", choices, max: 2, per_page: 10)
-    weapon_one = weapon_choices[0]
-    weapon_two = weapon_choices[1]
-    player.weapons << Weapon.all.select {|weapon| weapon.name == weapon_one}
-    player.weapons << Weapon.all.select {|weapon| weapon.name == weapon_two}
-    sleep(0.5)
+    if weapon_choices.count > 0
+        weapon_one = weapon_choices[0]
+        weapon_two = weapon_choices[1]
+        player.weapons << Weapon.all.select {|weapon| weapon.name == weapon_one}
+        player.weapons << Weapon.all.select {|weapon| weapon.name == weapon_two}
+        sleep(0.5)
+    else
+        puts "You must have at least one weapon!"
+        sleep(1)
+        system("clear")
+        select_weapons(player)
+    end
 end
 
 #PLAY GAME
