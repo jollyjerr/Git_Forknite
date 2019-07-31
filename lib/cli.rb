@@ -144,12 +144,19 @@ end
 # HANDLE END OF GAME
 def game_over
     winner = Player.all.select {|player| player.health > 0}[0]
-    losers = Player.all.select {|player| player.health < 0}
+    losers = Player.all.select {|player| player.health <= 0}
     system("clear")
     puts "#{winner.name}".center(150)
     Screen.one
     losers.each {|player| puts "#{player.name} got forked!!!".center(150)}
-    
+    choice = Prompt.select("Whats next #{winner.name}?", ["Rematch", "Exit Game"])
+    case choice
+    when "Rematch"
+        rematch
+    when "Exit Game"
+        exit
+    end
 end
+
 
 
