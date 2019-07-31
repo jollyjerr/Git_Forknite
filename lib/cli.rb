@@ -73,7 +73,6 @@ def duel_checker(player)
         game_over
     end
     refresh_screen
-    turn_duel(player)
     if player.health > 0
         turn_duel(player)
     else
