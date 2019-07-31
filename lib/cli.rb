@@ -30,6 +30,8 @@ def create_player
     new_player = Player.create(name: player_name)
     system("clear")
     select_weapons(new_player)
+    system("clear")
+    select_spells(new_player)
 end
 
 def select_weapons(player)
@@ -52,6 +54,18 @@ def select_weapons(player)
         select_weapons(player)
     end
 end
+
+def select_spells(player)
+    puts ''
+    puts ''
+    puts "Welcome #{player.name}!".center(95)
+    Screen.spell_selection
+    choices = Spell.all.map {|spell| spell.name}
+    spell_choice = Prompt.select("", choices)
+    player.spells << Spell.all.select {|spell| spell.name == spell_choice}
+    sleep(0.5)
+end
+
 
 #PLAY GAME
 def match
