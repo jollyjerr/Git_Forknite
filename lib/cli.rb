@@ -161,6 +161,7 @@ def game_over
 end
 
 def rematch
-    
+    Player.all.each {|player| player.update(health: 100)}
+    match
 end
 
