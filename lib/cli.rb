@@ -68,9 +68,8 @@ end
 def duel_checker(player)
     live_players = Player.all.select {|player| player.health > 0}
     number_of_players = live_players.count
-    refresh_screen
     if number_of_players == 2
-        # puts "                                                                         player health on turn is #{player.health}"
+        refresh_screen
         turn_duel(player)
     end
 end
@@ -137,6 +136,7 @@ end
 
 # HANDLE END OF GAME
 def game_over
+    Screen.one
     puts "You got FORKED"
 end
 
