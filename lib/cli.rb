@@ -149,14 +149,18 @@ def game_over
     puts "#{winner.name}".center(150)
     Screen.one
     losers.each {|player| puts "#{player.name} got forked!!!".center(150)}
-    choice = Prompt.select("Whats next #{winner.name}?", ["Rematch", "Exit Game"])
+    choice = Prompt.select("Whats next #{winner.name}?", ["Rematch", "New Game", "Exit Game"])
     case choice
     when "Rematch"
         rematch
+    when "New Game"
+        main_menu
     when "Exit Game"
         exit
     end
 end
 
-
+def rematch
+    
+end
 
