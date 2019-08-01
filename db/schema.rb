@@ -10,11 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_31_223554) do
+ActiveRecord::Schema.define(version: 2019_08_01_161720) do
 
   create_table "players", force: :cascade do |t|
     t.string "name"
     t.integer "health", default: 100, null: false
+    t.integer "level"
   end
 
   create_table "players_spells", force: :cascade do |t|
@@ -25,6 +26,13 @@ ActiveRecord::Schema.define(version: 2019_07_31_223554) do
   create_table "players_weapons", force: :cascade do |t|
     t.integer "weapon_id"
     t.integer "player_id"
+  end
+
+  create_table "saved_profiles", force: :cascade do |t|
+    t.string "name"
+    t.string "bio"
+    t.string "password"
+    t.integer "level"
   end
 
   create_table "spells", force: :cascade do |t|
