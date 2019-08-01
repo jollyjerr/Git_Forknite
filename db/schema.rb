@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2019_08_01_161720) do
   create_table "players", force: :cascade do |t|
     t.string "name"
     t.integer "health", default: 100, null: false
-    t.integer "level"
+    t.integer "level", default: 0, null: false
   end
 
   create_table "players_spells", force: :cascade do |t|
