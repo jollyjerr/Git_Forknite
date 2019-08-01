@@ -67,9 +67,9 @@ def login
     login_choice_linked_to_db = SavedProfile.all.select {|profile| profile.name == login_choice}[0]
     password = Prompt.mask("Please enter your password")
     if password == login_choice_linked_to_db.password
+        system("clear")
         returning_user = Player.create(name: login_choice, level: login_choice_linked_to_db.level)
         select_weapons(returning_user)
-        system("clear")
         select_spells(returning_user)
     else
         puts "Sorry, wrong password!"
@@ -106,17 +106,19 @@ def select_weapons(player)
         system("clear")
         select_weapons(player)
     end
+    system("clear")
 end
 
 def select_spells(player)
     puts ''
     puts ''
-    puts "Welcome #{player.name}!".center(95)
+    puts Pastel.green(Font.write("Welcome, #{player.name}!".center(110)))
     Screen.spell_selection
     choices = Spell.all.map {|spell| spell.name}
     spell_choice = Prompt.select("", choices)
     player.spells << Spell.all.select {|spell| spell.name == spell_choice}
     sleep(0.5)
+    system("clear")
 end
 
 
@@ -296,7 +298,6 @@ def game_over
     puts ""
     puts Pastel.green(Font.write("#{winner.name}".center(150)))
     Screen.one
-<<<<<<< HEAD
     losers.each {|player| puts Pastel.red("#{player.name} got forked!!!".center(150))}
     if winner.level < 2
         choice = Prompt.select("Whats next #{winner.name}?", ["Save My Profile!", "Rematch", "New Game", "Exit Game"])
