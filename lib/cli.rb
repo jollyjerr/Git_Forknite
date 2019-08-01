@@ -4,7 +4,7 @@ require 'pastel'
 require 'tty-font'
 Prompt = TTY::Prompt.new
 Pastel = Pastel.new
-Font = TTY::Font.new(:doom)
+Font = TTY::Font.new(:straight)
 Numbers_to_name = {5 => "five", 4 => "four", 3 => "three", 2 => "two", 1 => "one"}
 
 
