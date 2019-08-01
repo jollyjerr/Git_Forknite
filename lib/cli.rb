@@ -6,7 +6,7 @@ Numbers_to_name = {5 => "five", 4 => "four", 3 => "three", 2 => "two", 1 => "one
 
 def main_menu
     system("clear")
-    # Spell.destroy_all        #FOR DESTRYOING TABLE DATA
+    # Spell.destroy_all        #FOR DESTROYING TABLE DATA
     # Weapon.destroy_all       #
     # SavedProfile.destroy_all #
     Player.destroy_all
