@@ -11,7 +11,7 @@ def main_menu
     # SavedProfile.destroy_all #
     Player.destroy_all
     Screen.welcome
-    pid = fork{exec 'afplay', "./theme.mp3"}
+    # pid = fork{exec 'afplay', "./theme.mp3"}
     user_input = gets.chomp.to_i
     case user_input
     when 2..5
@@ -30,16 +30,36 @@ end
 
 # PLAYER CREATION
 def create_player
-    Screen.new_player
-    player_name = gets.chomp.to_str
-    if player_name == ""
-        player_name = "Steve"
+    player_path = Prompt.select("", ["Create New", "Login"])
+    case player_path
+    when "Login"
+        login
+    when "Create New"
+        Screen.new_player
+        player_name = gets.chomp.to_str
+        if player_name == ""
+            player_name = "Steve"
+        end
+        new_player = Player.create(name: player_name)
+        system("clear")
+        select_weapons(new_player)
+        system("clear")
+        select_spells(new_player)
     end
-    new_player = Player.create(name: player_name)
-    system("clear")
-    select_weapons(new_player)
-    system("clear")
-    select_spells(new_player)
+end
+
+def login
+    # Screen.login
+    profiles = SavedProfile.all.map {|profile| "#{profile.name} | Bio: #{profile.bio} | Level: #{profile.level}"}
+    login_choice = Prompt.select("", profiles).chomp(" | ")
+    puts "**********************&&&&&&&&&&&&&&&&&&&&&&&&#{login_choice}"
+    login_choice_linked_to_db = SavedProfile.all.select {|profile| profile.id == (profiles.index(login_choice) + 2)}
+    puts "************************#{login_choice_linked_to_db}****************"
+    sleep(10)
+    password = Prompt.mask("Please enter your password")
+    if password == login_choice_linked_to_db.password
+
+    end
 end
 
 def select_weapons(player)
