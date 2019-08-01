@@ -51,6 +51,7 @@ def create_player
             player_name = "Steve"
         end
         if check_if_profile_logged_in(player_name)
+            system("clear")
             new_player = Player.create(name: player_name)
             system("clear")
             select_weapons(new_player)
