@@ -10,6 +10,7 @@ def main_menu
     # Weapon.destroy_all    #
     Player.destroy_all
     Screen.welcome
+    pid = fork{exec 'afplay', "./theme.mp3"}
     user_input = gets.chomp.to_i
     case user_input
     when 2..5
@@ -233,6 +234,7 @@ def game_over
     when "Rematch"
         rematch
     when "New Game"
+        pid = fork{exec 'killall', "afplay"}
         main_menu
     when "Exit Game"
         system("clear")
