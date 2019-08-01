@@ -21,8 +21,8 @@ class Screen
     def self.new_player
         puts ''
         puts ''
-        puts '                                         Welcome, new champion!         '
-        puts '                                                                            / \       Please enter your name:        '
+        puts '                                         Welcome, new champion!                       Please enter your name:                                  '
+        puts '                                                                            / \            '
         puts '                                                                           |   |                                     '
         puts '                                                                            \ /                                      '
         puts '                                                                             |                                       '
@@ -51,7 +51,7 @@ class Screen
         puts '                                                                            / \       Please choose a spell:         '
         puts '                                                                           |   |                                     '
         puts '                                                                            \ /                                      '
-        puts '                                                                        \    |                                       '
+        puts '                                                                        |    |                                       '
         puts '                                                                         \__ | \                                     '
         puts '                                                                             |  \                                    '
         puts '                                                                             |                                       '
@@ -61,11 +61,10 @@ class Screen
         puts '                                        ------------------------------------------------------------------------------------'
     end
     def self.one                 
-        puts '                                          _  _   _   ____    _    ____  _   _   ____   _____   __ _    _     _____  '
-        puts '                                        _| || |_/ | | __ )  / \  / ___|| | | | |  _ \ / _ \ \ / // \  | |   | ____| '
-        puts '                                       |_  ..  _| | |  _ \ / _ \ \___ \| |_| | | |_) | | | \ V // _ \ | |   |  _|   '
-        puts '                                       |_      _| | | |_) / ___ \ ___) |  _  | |  _ <| |_| || |/ ___ \| |___| |___  '
-        puts '                                         |_||_| |_| |____/_/   \_\____/|_| |_| |_| \_|\___/ |_/_/   \_\_____|_____| '                                                                          
+        puts '                                                                                                                                                                                                                                        '
+        puts Pastel.green(Font.write("#1 BASH ROYALE".center(100)))                                                                                                                    
+        puts '                                                                                                                    '
+        puts '                                                                                                                    '                                                                          
         puts ''
         puts ''
         puts '                                                            / \                                                     '
@@ -82,7 +81,7 @@ class Screen
     end
     def self.two
         puts ''
-        puts ''
+        puts Pastel.red(Font.write("Duel!!!".center(125)))
         puts ''
         puts '                                                               / \                 / \                                      '
         puts '                                                              |   |               |   |                                     '
@@ -98,7 +97,7 @@ class Screen
     end
     def self.three
         puts ''
-        puts ''
+        puts Pastel.red(Font.write("Battle!!!".center(125)))
         puts ''
         puts '                                                          / \                 / \                 / \                       '
         puts '                                                         |   |               |   |               |   |                      '
@@ -114,7 +113,7 @@ class Screen
     end
     def self.four
         puts ''
-        puts ''
+        puts Pastel.red(Font.write("Battle!!!".center(125)))
         puts ''
         puts '                                                   / \                 / \                 / \                 / \          '
         puts '                                                  |   |               |   |               |   |               |   |         '
@@ -130,7 +129,7 @@ class Screen
     end
     def self.five
         puts ''
-        puts ''
+        puts Pastel.red(Font.write("Battle!!!".center(125)))
         puts ''
         puts '                                               / \               / \               / \               / \             / \    '
         puts '                                              |   |             |   |             |   |             |   |           |   |   '
