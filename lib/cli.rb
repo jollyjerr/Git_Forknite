@@ -90,7 +90,7 @@ end
 def select_weapons(player)
     puts ''
     puts ''
-    puts Pastel.green(Font.write("Welcome, #{player.name}!".center(110)))
+    puts Pastel.green(Font.write("Welcome, #{player.name}!".center(150)))
     Screen.weapon_selection
     choices = Weapon.all.map {|weapon| weapon.name}
     weapon_choices = Prompt.multi_select("", choices, max: 2, per_page: 10)
@@ -112,7 +112,7 @@ end
 def select_spells(player)
     puts ''
     puts ''
-    puts Pastel.green(Font.write("Welcome, #{player.name}!".center(110)))
+    puts Pastel.green(Font.write("Welcome, #{player.name}!".center(150)))
     Screen.spell_selection
     choices = Spell.all.map {|spell| spell.name}
     spell_choice = Prompt.select("", choices)
@@ -263,6 +263,7 @@ def use_spell(player)
 end
 
 def display_stats(players)
+    puts "[Player Name, Health Status]".center(150)
     puts "#{players.pluck(:name, :health)}".center(150)
 end
 

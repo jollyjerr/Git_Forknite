@@ -3,26 +3,26 @@ class Screen
     def self.welcome
         puts ''
         puts ''
-        puts '                                                       \        / __      __  __  _   _  __    _____ __                      '
-        puts '                                                        \  /\  / |__ |   |   |  | |\ /| |__      |  |  |                     '
-        puts '                                                         \/  \/  |__ |__ |__ |__| | v | |__      |  |__|                     '
-        puts '                                       _____                  _____                                                      _   '
-        puts '                                      |  ___|                |  ___|                                                    | |  '
-        puts '                                      | |        _   _____   | |     _____   _____    _  _    _   _   _   _____   ____  | |  '
-        puts '                                      | |  ___  | | |__ __|  | |__  |  _  | |  _  |  | |/ /  | | | | | | |__ __| |  __| | |  '
-        puts '                                      | | |_  | | |   | |    |  __| | | | | | |_| |  |   |   |  \| | | |   | |   | |__  |_|  '
-        puts '                                      | |___| | | |   | |    | |    | |_| | | | \ \  | |\ \  | |\  | | |   | |   | |__   _   '
-        puts '                                      |_______| |_|   |_|    |_|    |_____| |_|  \_\ |_| \_\ |_| \_| |_|   |_|   |____| |_|  '
+        puts '                                                                               \        / __      __  __  _   _  __    _____ __                      '
+        puts '                                                                                \  /\  / |__ |   |   |  | |\ /| |__      |  |  |                     '
+        puts '                                                                                 \/  \/  |__ |__ |__ |__| | v | |__      |  |__|                     '
+        puts '                                                               _____                  _____                                                      _   '
+        puts '                                                              |  ___|                |  ___|                                                    | |  '
+        puts '                                                              | |        _   _____   | |     _____   _____    _  _    _   _   _   _____   ____  | |  '
+        puts '                                                              | |  ___  | | |__ __|  | |__  |  _  | |  _  |  | |/ /  | | | | | | |__ __| |  __| | |  '
+        puts '                                                              | | |_  | | |   | |    |  __| | | | | | |_| |  |   |   |  \| | | |   | |   | |__  |_|  '
+        puts '                                                              | |___| | | |   | |    | |    | |_| | | | \ \  | |\ \  | |\  | | |   | |   | |__   _   '
+        puts '                                                              |_______| |_|   |_|    |_|    |_____| |_|  \_\ |_| \_\ |_| \_| |_|   |_|   |____| |_|  '
         puts ''
         puts ''
-        puts '                                                             Enter number of players between 2 and 5!'
-        puts ''
+        puts '                                                                                     Enter number of players between 2 and 5!'
+        puts ''             
     end
     def self.player_path
         puts ''
         puts ''
-        puts '                                         Welcome, champion!         '
-        puts '                                                                            / \               '
+        puts 'Welcome, champion!                                                                                                  '
+        puts '                                                                            / \                                      '
         puts '                                                                           |   |                                     '
         puts '                                                                            \ /                                      '
         puts '                                                                             |                                       '
@@ -37,8 +37,8 @@ class Screen
     def self.new_player
         puts ''
         puts ''
-        puts '                                         Welcome, new champion!                       Please enter your name:                                  '
-        puts '                                                                            / \            '
+        puts 'Welcome, new champion!                                                                                               '
+        puts '                                                                            / \                                      '
         puts '                                                                           |   |                                     '
         puts '                                                                            \ /                                      '
         puts '                                                                             |                                       '
@@ -47,38 +47,44 @@ class Screen
         puts '                                                                             |                                       '
         puts '                                                                            / \                                      '
         puts '                                                                           /   \                                     '
-        puts '                                                                          /     \                                    '
+        puts 'Please enter your name:                                                   /     \                                    '
         puts '                                        ------------------------------------------------------------------------------------'
     end
-    def self.weapon_selection                                                                                                            
-        puts '                                                                            / \       Please choose two weapons:     '
+    def self.weapon_selection    
+        puts ""
+        puts ""
+        puts ""
+        puts ""                                                                                                    
+        puts '                                                                            / \                                      '
         puts '                                                                           |   |                                     '
         puts '                                                                            \ /                                      '
         puts '                                                                        \/   |                                       '
         puts '                                                                         \__ | \                                     '
-        puts '                                                                             |  \                                    '
+        puts 'Please choose 2 weapons:                                                     |  \                                    '
         puts '                                                                             |                                       '
-        puts '                                                                            / \                                      '
-        puts '                                                                           /   \                                     '
-        puts '                                                                          /     \                                    '
+        puts 'Press up and down arrows to toggle through weapons                          / \                                      '
+        puts 'Press spacebar to select weapons                                           /   \                                     '
+        puts 'Press enter to submit weapon choice                                       /     \                                    '
         puts '                                        ------------------------------------------------------------------------------------'
     end
-    def self.spell_selection                                                                                                            
-        puts '                                                                            / \       Please choose a spell:         '
+    def self.spell_selection  
+        puts ""
+        puts ""
+        puts '                                                                            / \                                      '
         puts '                                                                           |   |                                     '
         puts '                                                                            \ /                                      '
         puts '                                                                        |    |                                       '
         puts '                                                                         \__ | \                                     '
-        puts '                                                                             |  \                                    '
+        puts ' Please choose a spell:                                                                   |  \                                    '
         puts '                                                                             |                                       '
-        puts '                                                                            / \                                      '
-        puts '                                                                           /   \                                     '
-        puts '                                                                          /     \                                    '
+        puts ' Press up and down arrows to toggle through spells                          / \                                      '
+        puts ' Press spacebar to select a spell                                          /   \                                     '
+        puts ' Press enter to submit spell choice                                       /     \                                    '
         puts '                                        ------------------------------------------------------------------------------------'
     end
     def self.one                 
         puts '                                                                                                                                                                                                                                        '
-        puts Pastel.green(Font.write("#1 BASH ROYALE".center(100)))                                                                                                                    
+        puts Pastel.green(Font.write("#1 BASH ROYALE".center(115)))                                                                                                                    
         puts '                                                                                                                    '
         puts '                                                                                                                    '                                                                          
         puts ''
@@ -97,7 +103,7 @@ class Screen
     end
     def self.two
         puts ''
-        puts Pastel.red(Font.write("Duel!!!".center(125)))
+        puts Pastel.red(Font.write("Duel!!!".center(150)))
         puts ''
         puts '                                                               / \                 / \                                      '
         puts '                                                              |   |               |   |                                     '
@@ -113,7 +119,7 @@ class Screen
     end
     def self.three
         puts ''
-        puts Pastel.red(Font.write("Battle!!!".center(125)))
+        puts Pastel.red(Font.write("Battle!!!".center(130)))
         puts ''
         puts '                                                          / \                 / \                 / \                       '
         puts '                                                         |   |               |   |               |   |                      '
