@@ -6,6 +6,8 @@ Numbers_to_name = {5 => "five", 4 => "four", 3 => "three", 2 => "two", 1 => "one
 
 def main_menu
     system("clear")
+    # Spell.destroy_all     #FOR DESTRYOING TABLE DATA
+    # Weapon.destroy_all    #
     Player.destroy_all
     Screen.welcome
     user_input = gets.chomp.to_i
@@ -27,6 +29,9 @@ end
 def create_player
     Screen.new_player
     player_name = gets.chomp.to_str
+    if player_name == ""
+        player_name = "Steve"
+    end
     new_player = Player.create(name: player_name)
     system("clear")
     select_weapons(new_player)
@@ -98,10 +103,16 @@ end
 def turn_duel(player)
     live_players = Player.all.select {|player| player.health > 0}
     target = live_players.select {|target| target.name != player.name}[0]
-    target.health -= attack(player)
-    target.save
-    puts target.health
-    sleep(0.5)
+    puts "                                        #{player.name}, its your turn!"
+    plan = Prompt.select("", ["Weapon", "Spell"])
+    case plan
+    when "Weapon"
+        target.health -= weapon_attack(player)
+        target.save
+        sleep(0.5)
+    when "Spell"
+        use_spell(player)
+    end
 end
 
 def many_checker(player)
@@ -113,31 +124,85 @@ def many_checker(player)
             duel_checker(live_players[player_num])
         end
         match
-    elsif player.health > 0
+    else
         refresh_screen
         turn_many(player)
     end
 end
 
 def turn_many(player)
+    puts "                                        #{player.name}, its your turn!"
+    plan = Prompt.select("", ["Weapon", "Spell"])
+    case plan
+    when "Weapon"
+        target = choose_target(player)
+        target.health -= weapon_attack(player)
+        target.save
+        # puts target.health
+        sleep(0.5)
+    when "Spell"
+        use_spell(player)
+    end
+end
+
+def choose_target(player)
     puts "                                        #{player.name}, choose a target!"
     live_players = Player.all.select {|player| player.health > 0}
     choices = live_players.map {|player| player.name}
     input = Prompt.select("", choices)
     target = Player.all.select {|target| target.name == input || target.id == input}[0]
-    target.health -= attack(player)
-    target.save
-    puts target.health
-    sleep(0.5)
+    target
 end
 
-def attack(player)
+def weapon_attack(player)
     puts "                                        #{player.name}, choose a weapon!"
     puts ''
     choices = player.weapons.map {|weapon| weapon.name}
     weapon_choice = Prompt.select("", choices)
     weapon = player.weapons.select {|weapon| weapon.name == weapon_choice}[0]
     weapon.damage
+end
+
+def use_spell(player)
+    spell = player.spells[0]
+    puts spell.name
+    case spell.name
+    when "Meteor Shower"
+        targets = Player.all.select {|opp| opp.name != player.name}
+        targets.each do |target|
+            target.health -= spell.damage
+            target.save
+            sleep(0.5)
+        end
+    when "Hugs and Kisses"
+        targets = Player.all.select {|opp| opp.name != player.name}
+        targets.each do |target|
+            target.health += spell.health
+            target.save
+            sleep(0.5)
+        end
+    when "Expelliarmus"
+        target = choose_target(player)
+        target_weapons = target.weapons.map {|weapon| weapon.name}
+        if target_weapons.count > 1
+            weapon_remover = Prompt.select("Pick a weapon to steal!", target_weapons)
+            target.weapons.each do |weapon|
+                if weapon.name == weapon_remover
+                    target.weapons.delete(weapon)
+                end
+            end
+            player.weapons << Weapon.all.select {|weapon| weapon.name == weapon_remover}
+        else
+            puts "You cannot disarm this player, jerk!"
+            sleep(2.5)
+        end
+    else
+        target = choose_target(player)
+        target.health += spell.health
+        target.health -= spell.damage
+        target.save
+    end
+    sleep(0.5)
 end
 
 def display_stats(players)
@@ -170,6 +235,7 @@ def game_over
     when "New Game"
         main_menu
     when "Exit Game"
+        system("clear")
         exit
     end
 end
