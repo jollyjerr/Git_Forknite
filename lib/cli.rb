@@ -30,6 +30,7 @@ end
 
 # PLAYER CREATION
 def create_player
+    Screen.player_path
     player_path = Prompt.select("", ["Create New", "Login"])
     case player_path
     when "Login"
@@ -50,7 +51,6 @@ def create_player
 end
 
 def login
-    # Screen.login
     SavedProfile.all.each {|profile| puts "#{profile.name} | Bio: #{profile.bio} | Level: #{profile.level}".center(150)}
     profiles = SavedProfile.all.map {|profile| profile.name}
     login_choice = Prompt.select("", profiles)

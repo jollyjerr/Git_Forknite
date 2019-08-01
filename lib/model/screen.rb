@@ -18,6 +18,22 @@ class Screen
         puts '                                                             Enter number of players between 2 and 5!'
         puts ''
     end
+    def self.player_path
+        puts ''
+        puts ''
+        puts '                                         Welcome, champion!         '
+        puts '                                                                            / \               '
+        puts '                                                                           |   |                                     '
+        puts '                                                                            \ /                                      '
+        puts '                                                                             |                                       '
+        puts '                                                                           / | \                                     '
+        puts '                                                                          /  |  \                                    '
+        puts '                                                                             |                                       '
+        puts '                                                                            / \                                      '
+        puts '                                                                           /   \                                     '
+        puts '                                                                          /     \                                    '
+        puts '                                        ------------------------------------------------------------------------------------'
+    end
     def self.new_player
         puts ''
         puts ''
