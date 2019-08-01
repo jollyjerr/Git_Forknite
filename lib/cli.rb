@@ -281,6 +281,7 @@ def game_over
     pid = fork{exec 'afplay', "./theme.mp3"}
     winner = Player.all.select {|player| player.health > 0}[0]
     losers = Player.all.select {|player| player.health <= 0}
+    level_up_winner(winner)
     system("clear")
     puts "#{winner.name}".center(150)
     Screen.one
@@ -315,5 +316,17 @@ end
 def rematch
     Player.all.each {|player| player.update(health: 100)}
     start_game
+end
+
+def level_up_winner(player)
+    player.level += 1
+    player.save
+    player_name = player.name
+    saved_player_names = SavedProfile.all.map {|player| player.name}
+    if saved_player_names.include?(player_name)
+        saved_player = SavedProfile.all.select{|profile| profile.name == player_name}[0]
+        saved_player.level += 1
+        saved_player.save
+    end
 end
 
