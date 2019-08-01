@@ -37,6 +37,7 @@ def create_player
     when "Create New"
         Screen.new_player
         player_name = gets.chomp.to_str
+        check_if_profile_logged_in(player_name)
         if player_name == ""
             player_name = "Steve"
         end
@@ -53,6 +54,7 @@ def login
     SavedProfile.all.each {|profile| puts "#{profile.name} | Bio: #{profile.bio} | Level: #{profile.level}".center(150)}
     profiles = SavedProfile.all.map {|profile| profile.name}
     login_choice = Prompt.select("", profiles)
+    check_if_profile_logged_in(login_choice)
     login_choice_linked_to_db = SavedProfile.all.select {|profile| profile.name == login_choice}[0]
     password = Prompt.mask("Please enter your password")
     if password == login_choice_linked_to_db.password
@@ -62,6 +64,16 @@ def login
         select_spells(returning_user)
     else
         puts "Sorry, wrong password!"
+        create_player
+    end
+end
+
+def check_if_profile_logged_in(name)
+    logged_in_profiles = Player.all.map {|player| player.name}
+    if logged_in_profiles.count == 0
+    end
+    if logged_in_profiles.include?(name)
+        puts "This profile is already set to fight!".center(150)
         create_player
     end
 end
