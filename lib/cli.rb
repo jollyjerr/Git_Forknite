@@ -19,6 +19,7 @@ def main_menu
         puts "Your choices are:".rjust(90)
         puts "2 | 3 | 4 | 5".rjust(88)
         sleep(3)
+        pid = fork{exec 'killall', "afplay"}
         main_menu
     end    
     system("clear")
