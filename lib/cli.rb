@@ -34,7 +34,12 @@ def create_player
     player_path = Prompt.select("", ["Create New", "Login"])
     case player_path
     when "Login"
-        login
+        if SavedProfile.all.count > 0
+            login
+        else
+            Puts "There are no saved profiles! :(".center(150)
+            create_player
+        end
     when "Create New"
         Screen.new_player
         player_name = gets.chomp.to_str
