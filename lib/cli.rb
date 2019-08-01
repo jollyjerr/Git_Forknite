@@ -24,7 +24,7 @@ def main_menu
     end    
     system("clear")
     number_of_players.times {|player| create_player}
-    match
+    start_game
 end
 
 # PLAYER CREATION
@@ -75,6 +75,13 @@ end
 
 
 #PLAY GAME
+def start_game
+    stop_music
+    sleep(0.005)
+    play_battle_theme
+    match
+end
+
 def match
     live_players = Player.all.select {|player| player.health > 0}
     number_of_players = live_players.count
@@ -221,9 +228,20 @@ def refresh_screen
     Screen.send(Numbers_to_name[number_of_players])
 end
 
+def stop_music
+    pid = fork{exec 'killall', "afplay"}
+end
+
+def play_battle_theme
+    pid = fork{exec 'afplay', "./battle.mp3"}
+end
+
 
 # HANDLE END OF GAME
 def game_over
+    stop_music
+    sleep(0.005)
+    pid = fork{exec 'afplay', "./theme.mp3"}
     winner = Player.all.select {|player| player.health > 0}[0]
     losers = Player.all.select {|player| player.health <= 0}
     system("clear")
@@ -235,10 +253,10 @@ def game_over
     when "Rematch"
         rematch
     when "New Game"
-        pid = fork{exec 'killall', "afplay"}
+        stop_music
         main_menu
     when "Exit Game"
-        pid = fork{exec 'killall', "afplay"}
+        stop_music
         system("clear")
         exit
     end
@@ -246,6 +264,6 @@ end
 
 def rematch
     Player.all.each {|player| player.update(health: 100)}
-    match
+    start_game
 end
 
