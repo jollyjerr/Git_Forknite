@@ -1,6 +1,10 @@
 require_all './lib'
 require 'tty-prompt'
+require 'pastel'
+require 'tty-font'
 Prompt = TTY::Prompt.new
+Pastel = Pastel.new
+Font = TTY::Font.new(:doom)
 Numbers_to_name = {5 => "five", 4 => "four", 3 => "three", 2 => "two", 1 => "one"}
 
 
@@ -86,7 +90,7 @@ end
 def select_weapons(player)
     puts ''
     puts ''
-    puts "Welcome #{player.name}!".center(95)
+    puts Pastel.green(Font.write("Welcome, #{player.name}!".center(110)))
     Screen.weapon_selection
     choices = Weapon.all.map {|weapon| weapon.name}
     weapon_choices = Prompt.multi_select("", choices, max: 2, per_page: 10)
@@ -279,6 +283,7 @@ def play_battle_theme
 end
 
 
+
 # HANDLE END OF GAME
 def game_over
     stop_music
@@ -288,9 +293,11 @@ def game_over
     losers = Player.all.select {|player| player.health <= 0}
     level_up_winner(winner)
     system("clear")
-    puts "#{winner.name}".center(150)
+    puts ""
+    puts Pastel.green(Font.write("#{winner.name}".center(150)))
     Screen.one
-    losers.each {|player| puts "#{player.name} got forked!!!".center(150)}
+<<<<<<< HEAD
+    losers.each {|player| puts Pastel.red("#{player.name} got forked!!!".center(150))}
     if winner.level < 2
         choice = Prompt.select("Whats next #{winner.name}?", ["Save My Profile!", "Rematch", "New Game", "Exit Game"])
         case choice
