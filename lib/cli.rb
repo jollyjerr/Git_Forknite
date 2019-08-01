@@ -45,6 +45,7 @@ def create_player
             create_player
         end
     when "Create New"
+        system("clear")
         Screen.new_player
         player_name = gets.chomp.to_str
         if player_name == ""

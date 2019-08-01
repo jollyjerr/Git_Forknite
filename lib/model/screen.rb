@@ -67,7 +67,7 @@ class Screen
         puts '                                                                            / \                                      '
         puts '                                                                           |   |                                     '
         puts '                                                                            \ /                                      '
-        puts '                                                                        |    |                                       '
+        puts '                                                                        \    |                                       '
         puts '                                                                         \__ | \                                     '
         puts 'Please choose a spell:                                                       |  \                                    '
         puts '                                                                             |                                       '
