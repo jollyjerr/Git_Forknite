@@ -6,8 +6,8 @@ Numbers_to_name = {5 => "five", 4 => "four", 3 => "three", 2 => "two", 1 => "one
 
 def main_menu
     system("clear")
-    # Spell.destroy_all     #FOR DESTRYOING TABLE DATA
-    # Weapon.destroy_all    #
+    # Spell.destroy_all        #FOR DESTRYOING TABLE DATA
+    # Weapon.destroy_all       #
     # SavedProfile.destroy_all #
     Player.destroy_all
     Screen.welcome
@@ -50,15 +50,19 @@ end
 
 def login
     # Screen.login
-    profiles = SavedProfile.all.map {|profile| "#{profile.name} | Bio: #{profile.bio} | Level: #{profile.level}"}
-    login_choice = Prompt.select("", profiles).chomp(" | ")
-    puts "**********************&&&&&&&&&&&&&&&&&&&&&&&&#{login_choice}"
-    login_choice_linked_to_db = SavedProfile.all.select {|profile| profile.id == (profiles.index(login_choice) + 2)}
-    puts "************************#{login_choice_linked_to_db}****************"
-    sleep(10)
+    SavedProfile.all.each {|profile| puts "#{profile.name} | Bio: #{profile.bio} | Level: #{profile.level}".center(150)}
+    profiles = SavedProfile.all.map {|profile| profile.name}
+    login_choice = Prompt.select("", profiles)
+    login_choice_linked_to_db = SavedProfile.all.select {|profile| profile.name == login_choice}[0]
     password = Prompt.mask("Please enter your password")
     if password == login_choice_linked_to_db.password
-
+        returning_user = Player.create(name: login_choice, level: login_choice_linked_to_db.level)
+        select_weapons(returning_user)
+        system("clear")
+        select_spells(returning_user)
+    else
+        puts "Sorry, wrong password!"
+        create_player
     end
 end
 
