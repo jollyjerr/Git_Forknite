@@ -286,30 +286,45 @@ def game_over
     puts "#{winner.name}".center(150)
     Screen.one
     losers.each {|player| puts "#{player.name} got forked!!!".center(150)}
-    choice = Prompt.select("Whats next #{winner.name}?", ["Save My Profile!", "Rematch", "New Game", "Exit Game"])
-    case choice
-    when "Save My Profile!"
-        system("clear")
-        #Screen.save_profile 
-        profile_data = Prompt.collect do 
-            key(:bio).ask('Give yourself a description!')
-            key(:password).mask('Set a simple password.')
+    if winner.level < 2
+        choice = Prompt.select("Whats next #{winner.name}?", ["Save My Profile!", "Rematch", "New Game", "Exit Game"])
+        case choice
+        when "Save My Profile!"
+            system("clear")
+            #Screen.save_profile 
+            profile_data = Prompt.collect do 
+                key(:bio).ask('Give yourself a description!')
+                key(:password).mask('Set a simple password.')
+            end
+            profile_data[:name] = winner.name
+            new_profile = SavedProfile.create(profile_data)
+            puts "Profile saved!".center(150)
+            sleep(2)
+            stop_music
+            main_menu
+        when "Rematch"
+            rematch
+        when "New Game"
+            stop_music
+            main_menu
+        when "Exit Game"
+            stop_music
+            system("clear")
+            exit
         end
-        profile_data[:name] = winner.name
-        new_profile = SavedProfile.create(profile_data)
-        puts "Profile saved!".center(150)
-        sleep(2)
-        stop_music
-        main_menu
-    when "Rematch"
-        rematch
-    when "New Game"
-        stop_music
-        main_menu
-    when "Exit Game"
-        stop_music
-        system("clear")
-        exit
+    else
+        choice = Prompt.select("Whats next #{winner.name}?", ["Rematch", "New Game", "Exit Game"])
+        case choice
+        when "Rematch"
+            rematch
+        when "New Game"
+            stop_music
+            main_menu
+        when "Exit Game"
+            stop_music
+            system("clear")
+            exit
+        end
     end
 end
 
