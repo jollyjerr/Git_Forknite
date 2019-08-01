@@ -11,7 +11,7 @@ def main_menu
     # SavedProfile.destroy_all #
     Player.destroy_all
     Screen.welcome
-    # pid = fork{exec 'afplay', "./theme.mp3"}
+    pid = fork{exec 'afplay', "./theme.mp3"}
     user_input = gets.chomp.to_i
     case user_input
     when 2..5
