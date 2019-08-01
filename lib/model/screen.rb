@@ -1,5 +1,5 @@
 require_all './lib'
-class Screen
+class Screen               
     def self.welcome
         puts ''
         puts ''
@@ -37,7 +37,7 @@ class Screen
     def self.new_player
         puts ''
         puts ''
-        puts '                                         Welcome, new champion!                       Please enter your name:                                  '
+        puts 'Welcome, new champion!                                                         '
         puts '                                                                            / \            '
         puts '                                                                           |   |                                     '
         puts '                                                                            \ /                                      '
@@ -47,32 +47,32 @@ class Screen
         puts '                                                                             |                                       '
         puts '                                                                            / \                                      '
         puts '                                                                           /   \                                     '
-        puts '                                                                          /     \                                    '
+        puts 'Please enter your name:                                                   /     \                                    '
         puts '                                        ------------------------------------------------------------------------------------'
     end
     def self.weapon_selection                                                                                                            
-        puts '                                                                            / \       Please choose two weapons:     '
+        puts '                                                                            / \                                      '
         puts '                                                                           |   |                                     '
         puts '                                                                            \ /                                      '
         puts '                                                                        \/   |                                       '
         puts '                                                                         \__ | \                                     '
-        puts '                                                                             |  \                                    '
+        puts 'Please choose 2 weapons:                                                     |  \                                    '
         puts '                                                                             |                                       '
-        puts '                                                                            / \                                      '
-        puts '                                                                           /   \                                     '
-        puts '                                                                          /     \                                    '
+        puts 'Press up and down arrows to toggle through weapons                          / \                                      '
+        puts 'Press spacebar to select weapons                                           /   \                                     '
+        puts 'Press enter to submit weapon choice                                       /     \                                    '
         puts '                                        ------------------------------------------------------------------------------------'
     end
     def self.spell_selection                                                                                                            
-        puts '                                                                            / \       Please choose a spell:         '
+        puts '                                                                            / \                                      '
         puts '                                                                           |   |                                     '
         puts '                                                                            \ /                                      '
         puts '                                                                        |    |                                       '
         puts '                                                                         \__ | \                                     '
-        puts '                                                                             |  \                                    '
+        puts 'Please choose a spell:                                                       |  \                                    '
         puts '                                                                             |                                       '
-        puts '                                                                            / \                                      '
-        puts '                                                                           /   \                                     '
+        puts 'Press up and down arrows to toggle through spells                           / \                                      '
+        puts 'Press spacebar to select a spell                                           /   \                                     '
         puts '                                                                          /     \                                    '
         puts '                                        ------------------------------------------------------------------------------------'
     end
