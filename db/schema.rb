@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2019_08_01_161720) do
     t.string "name"
     t.string "bio"
     t.string "password"
-    t.integer "level"
+    t.integer "level", default: 1, null: false
   end
 
   create_table "spells", force: :cascade do |t|

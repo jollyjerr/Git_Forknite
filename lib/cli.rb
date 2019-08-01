@@ -8,6 +8,7 @@ def main_menu
     system("clear")
     # Spell.destroy_all     #FOR DESTRYOING TABLE DATA
     # Weapon.destroy_all    #
+    # SavedProfile.destroy_all #
     Player.destroy_all
     Screen.welcome
     pid = fork{exec 'afplay', "./theme.mp3"}
@@ -251,7 +252,18 @@ def game_over
     choice = Prompt.select("Whats next #{winner.name}?", ["Save My Profile!", "Rematch", "New Game", "Exit Game"])
     case choice
     when "Save My Profile!"
-        
+        system("clear")
+        #Screen.save_profile 
+        profile_data = Prompt.collect do 
+            key(:bio).ask('Give yourself a description!')
+            key(:password).mask('Set a simple password.')
+        end
+        profile_data[:name] = winner.name
+        new_profile = SavedProfile.create(profile_data)
+        puts "Profile saved!".center(150)
+        sleep(2)
+        stop_music
+        main_menu
     when "Rematch"
         rematch
     when "New Game"
