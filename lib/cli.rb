@@ -47,15 +47,19 @@ def create_player
     when "Create New"
         Screen.new_player
         player_name = gets.chomp.to_str
-        check_if_profile_logged_in(player_name)
         if player_name == ""
             player_name = "Steve"
         end
-        new_player = Player.create(name: player_name)
-        system("clear")
-        select_weapons(new_player)
-        system("clear")
-        select_spells(new_player)
+        if check_if_profile_logged_in(player_name)
+            new_player = Player.create(name: player_name)
+            system("clear")
+            select_weapons(new_player)
+            system("clear")
+            select_spells(new_player)
+        else
+            system("clear")
+            create_player
+        end
     end
 end
 
@@ -63,16 +67,22 @@ def login
     SavedProfile.all.each {|profile| puts "#{profile.name} | Bio: #{profile.bio} | Level: #{profile.level}".center(150)}
     profiles = SavedProfile.all.map {|profile| profile.name}
     login_choice = Prompt.select("", profiles)
-    check_if_profile_logged_in(login_choice)
-    login_choice_linked_to_db = SavedProfile.all.select {|profile| profile.name == login_choice}[0]
-    password = Prompt.mask("Please enter your password")
-    if password == login_choice_linked_to_db.password
-        system("clear")
-        returning_user = Player.create(name: login_choice, level: login_choice_linked_to_db.level)
-        select_weapons(returning_user)
-        select_spells(returning_user)
+    if check_if_profile_logged_in(login_choice)
+        login_choice_linked_to_db = SavedProfile.all.select {|profile| profile.name == login_choice}[0]
+        password = Prompt.mask("Please enter your password")
+        if password == login_choice_linked_to_db.password
+            system("clear")
+            returning_user = Player.create(name: login_choice, level: login_choice_linked_to_db.level)
+            select_weapons(returning_user)
+            select_spells(returning_user)
+        else
+            puts "Sorry, wrong password!"
+            sleep(1.5)
+            system("clear")
+            create_player
+        end
     else
-        puts "Sorry, wrong password!"
+        system("clear")
         create_player
     end
 end
@@ -83,8 +93,10 @@ def check_if_profile_logged_in(name)
     end
     if logged_in_profiles.include?(name)
         puts "This profile is already set to fight!".center(150)
-        create_player
+        sleep(1.3)
+        return false
     end
+    return true
 end
 
 def select_weapons(player)
