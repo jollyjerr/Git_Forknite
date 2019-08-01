@@ -237,6 +237,7 @@ def game_over
         pid = fork{exec 'killall', "afplay"}
         main_menu
     when "Exit Game"
+        pid = fork{exec 'killall', "afplay"}
         system("clear")
         exit
     end
