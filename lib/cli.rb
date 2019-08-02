@@ -9,9 +9,6 @@ Numbers_to_name = {5 => "five", 4 => "four", 3 => "three", 2 => "two", 1 => "one
 
 
 def main_menu
-    # Spell.destroy_all        #FOR DESTROYING TABLE DATA
-    # Weapon.destroy_all       #
-    # SavedProfile.destroy_all #
     system("clear")
     Screen.welcome
     user_input = gets.chomp.to_i
