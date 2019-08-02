@@ -12,10 +12,6 @@ def main_menu
     # Spell.destroy_all        #FOR DESTROYING TABLE DATA
     # Weapon.destroy_all       #
     # SavedProfile.destroy_all #
-    Player.destroy_all
-    system("clear")
-    Screen.home
-    home_screen
     system("clear")
     Screen.welcome
     user_input = gets.chomp.to_i
@@ -35,10 +31,14 @@ def main_menu
 end
 
 def home_screen
+    Player.destroy_all
+    system("clear")
+    Screen.home
     pid = fork{exec 'afplay', "./theme.mp3"}
     input = Prompt.select("", ["New Game", "Profiles"])
     case input
     when "New Game"
+        main_menu
     when "Profiles"
         profiles
     end
@@ -50,6 +50,49 @@ def profiles
     SavedProfile.all.each {|profile| puts "#{profile.name} | Bio: #{profile.bio} | Level: #{profile.level}".center(150)}
     profiles = SavedProfile.all.map {|profile| profile.name}
     login_choice = Prompt.select("", [profiles,"Main Menu"])
+    case login_choice
+    when "Main Menu"
+        stop_music
+        sleep(0.005)
+        home_screen
+    else
+        edit_profile(login_choice)
+    end
+end
+
+def edit_profile(profile)
+    system("clear")
+    puts Pastel.green(Font.write("Welcome, #{profile}!".center(110)))
+    Screen.edit_profile
+    profile_linked_to_db = SavedProfile.all.select {|saved| saved.name == profile}[0]
+    action = Prompt.select("Edit your profile!", ["Rename", "Change bio", "Delete profile :(", "Back"])
+    case action 
+    when "Rename"
+        new_name = Prompt.ask("What is your new name?")
+        profile_linked_to_db.name = new_name
+        profile_linked_to_db.save
+        puts "Nice to meet you #{new_name}!".center(150)
+        sleep(1.5)
+        edit_profile(profile)
+    when "Change bio"
+        new_bio = Prompt.ask("How would you describe yourself?")
+        profile_linked_to_db.bio = new_bio
+        profile_linked_to_db.save
+        puts "Wow, you are so cool!"
+        sleep(1.5)
+        edit_profile(profile)
+    when "Delete profile :("
+        system("clear")
+        choice = Prompt.select("Once you delete your profile, it is gone forever! Are you Sure?", ["Yes", "No"])
+        if choice == "Yes"
+            profile_linked_to_db.destroy
+            system("clear")
+            puts "Sad to see you go!"
+        end
+        profiles
+    else
+        profiles
+    end
 end
 
 # PLAYER CREATION

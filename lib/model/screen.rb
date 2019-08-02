@@ -52,6 +52,22 @@ class Screen
         puts '                                            /     \           /     \             /     \         /     \  /     \  /     \  '
         puts '                                        ------------------------------------------------------------------------------------'
     end
+    def self.edit_profile
+        puts ''
+        puts ''
+        puts '                                                                                                                     '
+        puts '                                                                              / \                                      '
+        puts '                                                                             |   |                                     '
+        puts '                                                                              \ /                                      '
+        puts '                                                                          \    |                                       '
+        puts '                                                                           \__ | \                                     '
+        puts '                                                                               |  \                                    '
+        puts '                                                                               |                                       '
+        puts '                                                                              / \                                      '
+        puts '                                                                             /   \                                     '
+        puts '                                                                            /     \                                    '
+        puts '                                        ------------------------------------------------------------------------------------'
+    end
     def self.player_path
         puts ''
         puts ''
