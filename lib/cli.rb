@@ -411,12 +411,12 @@ def game_over
             puts "Profile saved!".center(150)
             sleep(2)
             stop_music
-            main_menu
+            home_screen
         when "Rematch"
             rematch
         when "New Game"
             stop_music
-            main_menu
+            home_screen
         when "Exit Game"
             stop_music
             system("clear")
