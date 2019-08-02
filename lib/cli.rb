@@ -56,7 +56,14 @@ def profiles
         sleep(0.005)
         home_screen
     else
-        edit_profile(login_choice)
+        if login_to_access_profile(login_choice)
+            edit_profile(login_choice)
+        else
+            puts "Sorry, wrong password!".center(150)
+            stop_music
+            sleep(1.5)
+            home_screen
+        end
     end
 end
 
@@ -65,7 +72,7 @@ def edit_profile(profile)
     puts Pastel.green(Font.write("Welcome, #{profile}!".center(110)))
     Screen.edit_profile
     profile_linked_to_db = SavedProfile.all.select {|saved| saved.name == profile}[0]
-    action = Prompt.select("Edit your profile!", ["Rename", "Change bio", "Delete profile :(", "Back"])
+    action = Prompt.select("Edit your profile!", ["Rename", "Change bio", "Change Password", "Delete profile :(", "Back"])
     case action 
     when "Rename"
         new_name = Prompt.ask("What is your new name?")
@@ -73,16 +80,22 @@ def edit_profile(profile)
         profile_linked_to_db.save
         puts "Nice to meet you #{new_name}!".center(150)
         sleep(1.5)
-        edit_profile(profile)
+        edit_profile(new_name)
     when "Change bio"
         new_bio = Prompt.ask("How would you describe yourself?")
         profile_linked_to_db.bio = new_bio
         profile_linked_to_db.save
-        puts "Wow, you are so cool!"
+        puts "Wow, you are so cool!".center(150)
+        sleep(1.5)
+        edit_profile(profile)
+    when "Change Password"
+        new_password = Prompt.ask("Please enter your new password")
+        profile_linked_to_db.password = new_password
+        profile_linked_to_db.save
+        puts "Password updated!".center(150)
         sleep(1.5)
         edit_profile(profile)
     when "Delete profile :("
-        system("clear")
         choice = Prompt.select("Once you delete your profile, it is gone forever! Are you Sure?", ["Yes", "No"])
         if choice == "Yes"
             profile_linked_to_db.destroy
@@ -92,6 +105,16 @@ def edit_profile(profile)
         profiles
     else
         profiles
+    end
+end
+
+def login_to_access_profile(profile)
+    profile_linked_to_db = SavedProfile.all.select {|saved| saved.name == profile}[0]
+    password_attempt = Prompt.mask("Please enter your password")
+    if password_attempt == profile_linked_to_db.password
+        return true
+    else
+        return false
     end
 end
 
@@ -141,7 +164,7 @@ def login
             select_weapons(returning_user)
             select_spells(returning_user)
         else
-            puts "Sorry, wrong password!"
+            puts "Sorry, wrong password!".center(150)
             sleep(1.5)
             system("clear")
             create_player
