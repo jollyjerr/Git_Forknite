@@ -49,5 +49,11 @@ Enter the world of Git Forknite and battle with your friends in the BASH Royale!
 - [Matt Deason](https://github.com/DeeMa17)
 - [Jeremiah Tabb](https://github.com/jollyjerr)
 
+## Demo Playthrough
+[Here!](https://youtu.be/hc3tlU89mpI)
+
 ## Contributing
 Feel free to open pull requests or report any bugs!
+
+## Lisence
+[GNU GPLv3](https://choosealicense.com/licenses/gpl-3.0/)
