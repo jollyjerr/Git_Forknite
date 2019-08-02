@@ -45,9 +45,9 @@ Enter the world of Git Forknite and battle with your friends in the BASH Royale!
 
 
 # The dev team:
-- Cody Shaben
-- Matt Deason
-- Jeremiah Tabb
+- [Cody Shaben](https://github.com/codyshaben) 
+- [Matt Deason](https://github.com/DeeMa17)
+- [Jeremiah Tabb](https://github.com/jollyjerr)
 
 ## Contributing
 Feel free to open pull requests or report any bugs!
