@@ -42,3 +42,12 @@ Enter the world of Git Forknite and battle with your friends in the BASH Royale!
 4. Choose what part of your profile you would like to change and follow prompts
 
 ![Edit Profile](https://github.com/jollyjerr/Git_Forknite/blob/master/github/edit-profile.gif)
+
+
+# The dev team:
+- Cody Shaben
+- Matt Deason
+- Jeremiah Tabb
+
+## Contributing
+Feel free to open pull requests or report any bugs!
