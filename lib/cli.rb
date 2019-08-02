@@ -401,7 +401,7 @@ def game_over
         case choice
         when "Save My Profile!"
             system("clear")
-            #Screen.save_profile 
+            Screen.edit_profile
             profile_data = Prompt.collect do 
                 key(:bio).ask('Give yourself a description!')
                 key(:password).mask('Set a simple password.')
@@ -429,7 +429,7 @@ def game_over
             rematch
         when "New Game"
             stop_music
-            main_menu
+            home_screen
         when "Exit Game"
             stop_music
             system("clear")
