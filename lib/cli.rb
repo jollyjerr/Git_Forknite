@@ -13,9 +13,8 @@ def main_menu
     # Spell.destroy_all        #FOR DESTROYING TABLE DATA
     # Weapon.destroy_all       #
     # SavedProfile.destroy_all #
-    Player.destroy_all
     Screen.welcome
-    pid = fork{exec 'afplay', "./theme.mp3"}
+    Player.destroy_all
     user_input = gets.chomp.to_i
     case user_input
     when 2..5
@@ -30,6 +29,17 @@ def main_menu
     system("clear")
     number_of_players.times {|player| create_player}
     start_game
+end
+
+def home_screen
+    pid = fork{exec 'afplay', "./theme.mp3"}
+    sleep(2)
+    input = Prompt.select("", ["New Game", "Profiles"])
+    case input
+    when "New Game"
+    when "Profiles"
+        profiles
+    end
 end
 
 # PLAYER CREATION
