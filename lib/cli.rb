@@ -32,12 +32,16 @@ def home_screen
     system("clear")
     Screen.home
     pid = fork{exec 'afplay', "./theme.mp3"}
-    input = Prompt.select("", ["New Game", "Profiles"])
+    input = Prompt.select("", ["New Game", "Profiles", "Exit"])
     case input
     when "New Game"
         main_menu
     when "Profiles"
         profiles
+    when "Exit"
+        stop_music
+        system("clear")
+        exit
     end
 end
 
@@ -124,7 +128,9 @@ def create_player
         if SavedProfile.all.count > 0
             login
         else
-            Puts "There are no saved profiles! :(".center(150)
+            puts "There are no saved profiles! :(".center(150)
+            sleep(2)
+            system("clear")
             create_player
         end
     when "Create New"
