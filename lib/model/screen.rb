@@ -1,5 +1,23 @@
 require_all './lib'
 class Screen               
+    def self.home
+        puts ''
+        puts ''
+        puts '                                                       \        / __      __  __  _   _  __    _____ __                      '
+        puts '                                                        \  /\  / |__ |   |   |  | |\ /| |__      |  |  |                     '
+        puts '                                                         \/  \/  |__ |__ |__ |__| | v | |__      |  |__|                     '
+        puts '                                       _____                  _____                                                      _   '
+        puts '                                      |  ___|                |  ___|                                                    | |  '
+        puts '                                      | |        _   _____   | |     _____   _____    _  _    _   _   _   _____   ____  | |  '
+        puts '                                      | |  ___  | | |__ __|  | |__  |  _  | |  _  |  | |/ /  | | | | | | |__ __| |  __| | |  '
+        puts '                                      | | |_  | | |   | |    |  __| | | | | | |_| |  |   |   |  \| | | |   | |   | |__  |_|  '
+        puts '                                      | |___| | | |   | |    | |    | |_| | | | \ \  | |\ \  | |\  | | |   | |   | |__   _   '
+        puts '                                      |_______| |_|   |_|    |_|    |_____| |_|  \_\ |_| \_\ |_| \_| |_|   |_|   |____| |_|  '
+        puts ''
+        puts ''
+        puts '                                                                 The classic game of BASH-royale!'
+        puts ''
+    end
     def self.welcome
         puts ''
         puts ''
@@ -17,6 +35,22 @@ class Screen
         puts ''
         puts '                                                             Enter number of players between 2 and 5!'
         puts ''
+    end
+    def self.profile
+        puts ''
+        puts ''
+        puts '                                                                                                                     '
+        puts '                                              / \               / \                 / \             / \      / \      / \    '
+        puts '                                             |   |             |   |               |   |           |   |    |   |    |   |   '
+        puts '                                              \ /               \ /                 \ /             \ /      \ /      \ /    '
+        puts '                                               |                 |                   |               |        |        |     '
+        puts '                                             / | \             / | \               / | \           / | \    / | \    / | \   '
+        puts '                                            /  |  \           /  |  \             /  |  \         /  |  \  /  |  \  /  |  \  '
+        puts '                                               |                 |                   |               |        |        |     '
+        puts '                                              / \               / \                 / \             / \      / \      / \    '
+        puts '                                             /   \             /   \               /   \           /   \    /   \    /   \   '
+        puts '                                            /     \           /     \             /     \         /     \  /     \  /     \  '
+        puts '                                        ------------------------------------------------------------------------------------'
     end
     def self.player_path
         puts ''

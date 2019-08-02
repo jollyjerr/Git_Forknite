@@ -9,12 +9,15 @@ Numbers_to_name = {5 => "five", 4 => "four", 3 => "three", 2 => "two", 1 => "one
 
 
 def main_menu
-    system("clear")
     # Spell.destroy_all        #FOR DESTROYING TABLE DATA
     # Weapon.destroy_all       #
     # SavedProfile.destroy_all #
-    Screen.welcome
     Player.destroy_all
+    system("clear")
+    Screen.home
+    home_screen
+    system("clear")
+    Screen.welcome
     user_input = gets.chomp.to_i
     case user_input
     when 2..5
@@ -33,13 +36,20 @@ end
 
 def home_screen
     pid = fork{exec 'afplay', "./theme.mp3"}
-    sleep(2)
     input = Prompt.select("", ["New Game", "Profiles"])
     case input
     when "New Game"
     when "Profiles"
         profiles
     end
+end
+
+def profiles
+    system("clear")
+    Screen.profile
+    SavedProfile.all.each {|profile| puts "#{profile.name} | Bio: #{profile.bio} | Level: #{profile.level}".center(150)}
+    profiles = SavedProfile.all.map {|profile| profile.name}
+    login_choice = Prompt.select("", [profiles,"Main Menu"])
 end
 
 # PLAYER CREATION
