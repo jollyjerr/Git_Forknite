@@ -55,5 +55,5 @@ Enter the world of Git Forknite and battle with your friends in the BASH Royale!
 ## Contributing
 Feel free to open pull requests or report any bugs!
 
-## Lisence
+## License
 [GNU GPLv3](https://choosealicense.com/licenses/gpl-3.0/)
